@@ -11,6 +11,7 @@ import com.thiagonishimura.controle_celular.domain.Categoria;
 import com.thiagonishimura.controle_celular.domain.Cidade;
 import com.thiagonishimura.controle_celular.domain.Cliente;
 import com.thiagonishimura.controle_celular.domain.Endereco;
+import com.thiagonishimura.controle_celular.domain.Equipamento;
 import com.thiagonishimura.controle_celular.domain.Estado;
 import com.thiagonishimura.controle_celular.domain.Servico;
 import com.thiagonishimura.controle_celular.domain.enums.TipoCliente;
@@ -18,6 +19,7 @@ import com.thiagonishimura.controle_celular.repositories.CategoriaRepository;
 import com.thiagonishimura.controle_celular.repositories.CidadeRepository;
 import com.thiagonishimura.controle_celular.repositories.ClienteRepository;
 import com.thiagonishimura.controle_celular.repositories.EnderecoRepository;
+import com.thiagonishimura.controle_celular.repositories.EquipamentoRepository;
 import com.thiagonishimura.controle_celular.repositories.EstadoRepository;
 import com.thiagonishimura.controle_celular.repositories.ServicoRepository;
 
@@ -36,6 +38,8 @@ public class ControleCelularApplication implements CommandLineRunner{
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private EquipamentoRepository equipamentoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ControleCelularApplication.class, args);
@@ -67,7 +71,7 @@ public class ControleCelularApplication implements CommandLineRunner{
 		Cidade c1 = new Cidade(null, "Uberlândia", est1);
 		Cidade c2 = new Cidade(null, "São Paulo", est2);
 		Cidade c3 = new Cidade(null, "Campinas", est2);
-
+		
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2, c3));
 
@@ -80,10 +84,18 @@ public class ControleCelularApplication implements CommandLineRunner{
 
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
 		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		
+		Equipamento eq1 = new Equipamento(null, "Celular", "Samsung", "J7 Prime", 1234578, "Branco", cli1);
+		Equipamento eq2 = new Equipamento(null, "Celular", "Motorola", "Moto G5S", 12344512, "Troca de tela", cli1);
+		Equipamento eq3 = new Equipamento(null, "Celular", "Samsung", "J2 Prime", 1245778, "Tela trincada", cli1);
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli1.getEquipamentos().addAll(Arrays.asList(eq1, eq2, eq3));
 
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		equipamentoRepository.saveAll(Arrays.asList(eq1, eq2, eq3));
+		
+		
 	}
 }

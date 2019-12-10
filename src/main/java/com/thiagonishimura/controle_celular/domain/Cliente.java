@@ -30,6 +30,9 @@ public class Cliente implements Serializable {
 
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Equipamento> equipamentos = new ArrayList<>();
 
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
@@ -103,6 +106,14 @@ public class Cliente implements Serializable {
 		this.telefones = telefones;
 	}
 
+	public List<Equipamento> getEquipamentos() {
+		return equipamentos;
+	}
+
+	public void setEquipamentos(List<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
