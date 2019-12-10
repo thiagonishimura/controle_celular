@@ -1,4 +1,4 @@
-package com.thiagonishimura.controle_celular;
+package com.thiagonishimura.celular;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
