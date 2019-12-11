@@ -40,6 +40,9 @@ public class Cliente implements Serializable {
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
+	
+	@OneToMany(mappedBy="cliente")
+	private List<OrdemDeServico> ordemDeServico = new ArrayList<>();
 
 	public Cliente() {
 	}
@@ -117,6 +120,14 @@ public class Cliente implements Serializable {
 		this.equipamentos = equipamentos;
 	}
 	
+	public List<OrdemDeServico> getOrdemDeServico() {
+		return ordemDeServico;
+	}
+
+	public void setOrdemDeServico(List<OrdemDeServico> ordemDeServico) {
+		this.ordemDeServico = ordemDeServico;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

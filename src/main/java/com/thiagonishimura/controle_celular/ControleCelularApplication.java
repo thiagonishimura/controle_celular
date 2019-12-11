@@ -1,5 +1,6 @@
 package com.thiagonishimura.controle_celular;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,13 @@ import com.thiagonishimura.controle_celular.domain.Cliente;
 import com.thiagonishimura.controle_celular.domain.Endereco;
 import com.thiagonishimura.controle_celular.domain.Equipamento;
 import com.thiagonishimura.controle_celular.domain.Estado;
+import com.thiagonishimura.controle_celular.domain.OrdemDeServico;
+import com.thiagonishimura.controle_celular.domain.Pagamento;
+import com.thiagonishimura.controle_celular.domain.PagamentoComCartao;
+import com.thiagonishimura.controle_celular.domain.PagamentoComDinheiro;
 import com.thiagonishimura.controle_celular.domain.Servico;
+import com.thiagonishimura.controle_celular.domain.enums.EstadoPagamento;
+import com.thiagonishimura.controle_celular.domain.enums.EstadoServico;
 import com.thiagonishimura.controle_celular.domain.enums.TipoCliente;
 import com.thiagonishimura.controle_celular.repositories.CategoriaRepository;
 import com.thiagonishimura.controle_celular.repositories.CidadeRepository;
@@ -21,6 +28,8 @@ import com.thiagonishimura.controle_celular.repositories.ClienteRepository;
 import com.thiagonishimura.controle_celular.repositories.EnderecoRepository;
 import com.thiagonishimura.controle_celular.repositories.EquipamentoRepository;
 import com.thiagonishimura.controle_celular.repositories.EstadoRepository;
+import com.thiagonishimura.controle_celular.repositories.OrdemDeServicoRepository;
+import com.thiagonishimura.controle_celular.repositories.PagamentoRepository;
 import com.thiagonishimura.controle_celular.repositories.ServicoRepository;
 
 @SpringBootApplication
@@ -40,6 +49,10 @@ public class ControleCelularApplication implements CommandLineRunner{
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private EquipamentoRepository equipamentoRepository;
+	@Autowired
+	private OrdemDeServicoRepository ordemDeServicoRepository;
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ControleCelularApplication.class, args);
@@ -96,6 +109,20 @@ public class ControleCelularApplication implements CommandLineRunner{
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		equipamentoRepository.saveAll(Arrays.asList(eq1, eq2, eq3));
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		OrdemDeServico os1 = new OrdemDeServico(null, sdf.parse("30/09/2017 10:32"), EstadoServico.PENDENTE, sdf.parse("30/09/2017 10:32"), cli1, e1);
+		OrdemDeServico os2 = new OrdemDeServico(null, sdf.parse("10/10/2017 19:35"), EstadoServico.PRONTO, sdf.parse("05/10/2017 15:32"), cli1, e2);
 		
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, os1, 6);
+		os1.setPagamento(pagto1);
+		
+		Pagamento pagto2 = new PagamentoComDinheiro(null, EstadoPagamento.PENDENTE, os2, sdf.parse("20/10/2017 00:00"), null);
+		os2.setPagamento(pagto2);
+
+		cli1.getOrdemDeServico().addAll(Arrays.asList(os1, os2));
+
+		ordemDeServicoRepository.saveAll(Arrays.asList(os1, os2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));		
 	}
 }
