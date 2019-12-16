@@ -2,6 +2,8 @@ package com.thiagonishimura.controle_celular.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.thiagonishimura.controle_celular.domain.enums.EstadoServico;
@@ -35,6 +38,9 @@ public class OrdemDeServico implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
+	
+	@OneToMany(mappedBy="id.ordemDeServico")
+	private Set<ItemOrdemDeServico> itens = new HashSet<>();
 	
 	public OrdemDeServico() {
 	}
@@ -104,6 +110,14 @@ public class OrdemDeServico implements Serializable {
 
 	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
 		this.enderecoDeEntrega = enderecoDeEntrega;
+	}
+	
+	public Set<ItemOrdemDeServico> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemOrdemDeServico> itens) {
+		this.itens = itens;
 	}
 
 	@Override

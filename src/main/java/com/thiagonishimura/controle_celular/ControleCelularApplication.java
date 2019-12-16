@@ -14,6 +14,7 @@ import com.thiagonishimura.controle_celular.domain.Cliente;
 import com.thiagonishimura.controle_celular.domain.Endereco;
 import com.thiagonishimura.controle_celular.domain.Equipamento;
 import com.thiagonishimura.controle_celular.domain.Estado;
+import com.thiagonishimura.controle_celular.domain.ItemOrdemDeServico;
 import com.thiagonishimura.controle_celular.domain.OrdemDeServico;
 import com.thiagonishimura.controle_celular.domain.Pagamento;
 import com.thiagonishimura.controle_celular.domain.PagamentoComCartao;
@@ -28,6 +29,7 @@ import com.thiagonishimura.controle_celular.repositories.ClienteRepository;
 import com.thiagonishimura.controle_celular.repositories.EnderecoRepository;
 import com.thiagonishimura.controle_celular.repositories.EquipamentoRepository;
 import com.thiagonishimura.controle_celular.repositories.EstadoRepository;
+import com.thiagonishimura.controle_celular.repositories.ItemOrdemDePedidoRepository;
 import com.thiagonishimura.controle_celular.repositories.OrdemDeServicoRepository;
 import com.thiagonishimura.controle_celular.repositories.PagamentoRepository;
 import com.thiagonishimura.controle_celular.repositories.ServicoRepository;
@@ -53,6 +55,8 @@ public class ControleCelularApplication implements CommandLineRunner{
 	private OrdemDeServicoRepository ordemDeServicoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemOrdemDePedidoRepository ordemDePedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ControleCelularApplication.class, args);
@@ -123,6 +127,19 @@ public class ControleCelularApplication implements CommandLineRunner{
 		cli1.getOrdemDeServico().addAll(Arrays.asList(os1, os2));
 
 		ordemDeServicoRepository.saveAll(Arrays.asList(os1, os2));
-		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));		
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemOrdemDeServico ios1 = new ItemOrdemDeServico(os1, s1, 0.00, 1, 2000.00);
+		ItemOrdemDeServico ios2 = new ItemOrdemDeServico(os1, s3, 0.00, 2, 80.00);
+		ItemOrdemDeServico ios3 = new ItemOrdemDeServico(os2, s2, 100.00, 1, 800.00);
+
+		os1.getItens().addAll(Arrays.asList(ios1, ios2));
+		os2.getItens().addAll(Arrays.asList(ios3));
+
+		s1.getItens().addAll(Arrays.asList(ios1));
+		s2.getItens().addAll(Arrays.asList(ios3));
+		s3.getItens().addAll(Arrays.asList(ios2));
+
+		ordemDePedidoRepository.saveAll(Arrays.asList(ios1, ios2, ios3));
 	}
 }
