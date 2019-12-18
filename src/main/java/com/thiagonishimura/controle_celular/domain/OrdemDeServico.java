@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.thiagonishimura.controle_celular.domain.enums.EstadoServico;
 
 @Entity
@@ -24,13 +26,20 @@ public class OrdemDeServico implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
+	
 	private EstadoServico estado;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataDaEntrega;
 
+	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="ordemDeServico")
 	private Pagamento pagamento;
 
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;

@@ -129,9 +129,9 @@ public class ControleCelularApplication implements CommandLineRunner{
 		ordemDeServicoRepository.saveAll(Arrays.asList(os1, os2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 		
-		ItemOrdemDeServico ios1 = new ItemOrdemDeServico(os1, s1, 0.00, 1, 2000.00);
+		ItemOrdemDeServico ios1 = new ItemOrdemDeServico(os1, s1, 5.00, 1, 200.00);
 		ItemOrdemDeServico ios2 = new ItemOrdemDeServico(os1, s3, 0.00, 2, 80.00);
-		ItemOrdemDeServico ios3 = new ItemOrdemDeServico(os2, s2, 100.00, 1, 800.00);
+		ItemOrdemDeServico ios3 = new ItemOrdemDeServico(os2, s2, 10.00, 1, 70.00);
 
 		os1.getItens().addAll(Arrays.asList(ios1, ios2));
 		os2.getItens().addAll(Arrays.asList(ios3));
