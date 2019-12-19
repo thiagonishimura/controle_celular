@@ -67,6 +67,11 @@ public class ControleCelularApplication implements CommandLineRunner{
 		
 		Categoria cat1 = new Categoria(null, "Tela");
 		Categoria cat2 = new Categoria(null, "Conector");
+		Categoria cat3 = new Categoria(null, "Bateria");
+		Categoria cat4 = new Categoria(null, "Acessórios");
+		Categoria cat5 = new Categoria(null, "Flex");
+		Categoria cat6 = new Categoria(null, "Software");
+		Categoria cat7 = new Categoria(null, "Placa");
 		
 		Servico s1 = new Servico(null, "Troca de frontal", 200.00);
 		Servico s2 = new Servico(null, "Troca de touch", 70.00);
@@ -79,7 +84,7 @@ public class ControleCelularApplication implements CommandLineRunner{
 		s2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		s3.getCategorias().addAll(Arrays.asList(cat1));
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		servicoRepository.saveAll(Arrays.asList(s1, s2, s3));
 		
 		Estado est1 = new Estado(null, "Minas Gerais");
