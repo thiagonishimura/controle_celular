@@ -30,6 +30,7 @@ public class ItemOrdemDeServicoPK implements Serializable {
 	public void setServico(Servico servico) {
 		this.servico = servico;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

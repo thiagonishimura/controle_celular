@@ -61,6 +61,14 @@ public class OrdemDeServico implements Serializable {
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
+	
+	public double getValorTotal() {
+		double soma = 0.0;
+		for (ItemOrdemDeServico ios : itens) {
+			soma = soma + ios.getSubTotal();
+		}
+		return soma;
+	}
 
 	public Integer getId() {
 		return id;

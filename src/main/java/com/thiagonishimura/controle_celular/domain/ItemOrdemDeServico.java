@@ -30,6 +30,10 @@ public class ItemOrdemDeServico implements Serializable {
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
+	
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
 
 	@JsonIgnore
 	public OrdemDeServico getOrdemDeServico() {
