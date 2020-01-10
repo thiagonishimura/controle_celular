@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.thiagonishimura.controle_celular.domain.ItemOrdemDeServico;
 
 @Repository
-public interface ItemOrdemDePedidoRepository extends JpaRepository<ItemOrdemDeServico, Integer> {
+public interface ItemOrdemDeServicoRepository extends JpaRepository<ItemOrdemDeServico, Integer> {
 
 }

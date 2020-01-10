@@ -39,10 +39,18 @@ public class ItemOrdemDeServico implements Serializable {
 	public OrdemDeServico getOrdemDeServico() {
 		return id.getOrdemDeServico();
 	}
+	
+	public void setOrdemDeServico(OrdemDeServico ordemDeServico) {
+		id.setOrdemDeServico(ordemDeServico);
+	}
 
 	public Servico getServico() {
 		return id.getServico();
 	}
+	
+	public void setServico(Servico servico) {
+		id.setServico(servico);
+	}	
 
 	public ItemOrdemDeServicoPK getId() {
 		return id;

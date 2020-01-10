@@ -29,7 +29,7 @@ import com.thiagonishimura.controle_celular.repositories.ClienteRepository;
 import com.thiagonishimura.controle_celular.repositories.EnderecoRepository;
 import com.thiagonishimura.controle_celular.repositories.EquipamentoRepository;
 import com.thiagonishimura.controle_celular.repositories.EstadoRepository;
-import com.thiagonishimura.controle_celular.repositories.ItemOrdemDePedidoRepository;
+import com.thiagonishimura.controle_celular.repositories.ItemOrdemDeServicoRepository;
 import com.thiagonishimura.controle_celular.repositories.OrdemDeServicoRepository;
 import com.thiagonishimura.controle_celular.repositories.PagamentoRepository;
 import com.thiagonishimura.controle_celular.repositories.ServicoRepository;
@@ -56,7 +56,7 @@ public class ControleCelularApplication implements CommandLineRunner{
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
 	@Autowired
-	private ItemOrdemDePedidoRepository ordemDePedidoRepository;
+	private ItemOrdemDeServicoRepository ordemDePedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ControleCelularApplication.class, args);
