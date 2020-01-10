@@ -57,6 +57,7 @@ public class DBService {
 	@Autowired
 	private ItemOrdemDeServicoRepository ordemDePedidoRepository;
 	
+
 	public void instantiateTestDatabase() throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Tela");
